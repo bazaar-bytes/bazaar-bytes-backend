@@ -1,8 +1,9 @@
 const express = require("express");
 const Order = require("../models/Order.model");
 const router = express.Router();
+const { isAuthenticated } = require("../middleware/jwt.middleware");
 
-router.get("/orders", (req, res, next) => {
+router.get("/orders", isAuthenticated, (req, res, next) => {
   Order.find({})
     .then((orders) => {
       console.log(orders);
@@ -14,7 +15,7 @@ router.get("/orders", (req, res, next) => {
     });
 });
 
-router.get("/orders/:orderId", (req, res, next) => {
+router.get("/orders/:orderId", isAuthenticated, (req, res, next) => {
   Order.findById(req.params.orderId)
     .then((orderFromDB) => {
       console.log(orderFromDB);
@@ -26,7 +27,7 @@ router.get("/orders/:orderId", (req, res, next) => {
     });
 });
 
-router.post("/orders", (req, res, next) => {
+router.post("/orders", isAuthenticated, (req, res, next) => {
   const { products, totalPrice, shippingAddress, user } = req.body;
   products.length > 0
     ? Order.create({ products, totalPrice, shippingAddress, user })

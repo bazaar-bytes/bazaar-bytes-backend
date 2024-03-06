@@ -1,6 +1,7 @@
 const express = require("express");
 const Product = require("../models/Product.model");
 const router = express.Router();
+const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 router.get("/products", (req, res, next) => {
   Product.find({})
@@ -26,7 +27,7 @@ router.get("/products/:productId", (req, res, next) => {
     });
 });
 
-router.post("/products", (req, res, next) => {
+router.post("/products", isAuthenticated, (req, res, next) => {
   const { name, description, price, image, category, user } = req.body;
 
   Product.create({ name, description, price, image, category, user })
@@ -40,7 +41,7 @@ router.post("/products", (req, res, next) => {
     });
 });
 
-router.put("/products/:productId", (req, res, next) => {
+router.put("/products/:productId", isAuthenticated, (req, res, next) => {
   const { name, description, price, image, category, user } = req.body;
   Product.findByIdAndUpdate(
     req.params.productId,
@@ -64,7 +65,7 @@ router.put("/products/:productId", (req, res, next) => {
     });
 });
 
-router.delete("/products/:productId", (req, res, next) => {
+router.delete("/products/:productId", isAuthenticated, (req, res, next) => {
   Product.findByIdAndDelete(req.params.productId)
     .then(() => {
       res.sendStatus(204);
