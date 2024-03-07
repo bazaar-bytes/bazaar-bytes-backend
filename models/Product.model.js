@@ -9,7 +9,7 @@ const productSchema = new Schema({
     type: String,
     enum: ["tech", "clothes", "furniture", "collectibles", "books", "vehicles"],
   },
-  user: { type: Schema.Types.ObjectId, ref: "User" },
+  createdBy: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 
 const Product = model("Product", productSchema);
