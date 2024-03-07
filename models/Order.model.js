@@ -7,14 +7,14 @@ const orderSchema = new Schema({
   //     quantity: Number,
   //   },
   // ],
-  products: {
-    type: [
-      {
-        productId: { type: Schema.Types.ObjectId, ref: "Product" },
-        quantity: Number,
-      },
-    ],
-  },
+
+  products: [
+    {
+      productId: { type: Schema.Types.ObjectId, ref: "Product" },
+      quantity: Number,
+    },
+  ],
+
   totalPrice: Number,
   shippingAddress: {
     firstName: { type: String, required: true },

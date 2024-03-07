@@ -20,6 +20,8 @@ app.use("/api", productsRoutes);
 
 const ordersRoutes = require("./routes/orders.routes");
 app.use("/api", ordersRoutes);
+const cartRoutes = require("./routes/cart.routes");
+app.use("/api", cartRoutes);
 
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
