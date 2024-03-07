@@ -1,12 +1,14 @@
 const express = require("express");
-const Cart = require("../models/Cart.model");
+const CartItem = require("../models/Cart.model");
 const router = express.Router();
 const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 router.get("/cart", isAuthenticated, (req, res, next) => {
-  const { products, price, user } = req.body;
-  const userEmail = user.email;
-  Cart.find({ userEmail })
+  const currentUserId = req.payload._id;
+  const { product, user } = req.body;
+
+  CartItem.find({ user: currentUserId })
+    .populate("product")
     .then((foundUser) => {
       res.status(200).json(foundUser);
     })
@@ -14,12 +16,13 @@ router.get("/cart", isAuthenticated, (req, res, next) => {
 });
 
 router.post("/cart", isAuthenticated, (req, res, next) => {
-  const { products, price, user } = req.body;
-  Cart.create({
-    products,
-    price,
+  const { product, user } = req.body;
+  console.log("reqBody", req.body);
+  CartItem.create({
+    product,
     user,
   })
+
     .then((createdCart) => {
       console.log(createdCart);
       res.status(201).json(createdCart);
