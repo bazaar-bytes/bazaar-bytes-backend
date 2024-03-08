@@ -22,10 +22,17 @@ router.post("/cart", isAuthenticated, (req, res, next) => {
     product,
     user,
   })
-
     .then((createdCart) => {
       console.log(createdCart);
       res.status(201).json(createdCart);
+    })
+    .catch((error) => next(error));
+});
+
+router.delete("/cart/:productId", isAuthenticated, (req, res, next) => {
+  CartItem.findByIdAndDelete(req.params.productId)
+    .then(() => {
+      res.sendStatus(204);
     })
     .catch((error) => next(error));
 });
