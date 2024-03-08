@@ -6,8 +6,9 @@ const isOwner = require("../middleware/isOwner");
 
 router.get("/products", (req, res, next) => {
   Product.find({})
+    .populate("createdBy")
     .then((products) => {
-      // console.log(products);
+      console.log(products);
       res.status(200).json(products);
     })
     .catch((err) => {
@@ -25,6 +26,16 @@ router.get("/products/:productId", (req, res, next) => {
     .catch((err) => {
       console.log(err);
       next(err);
+    });
+});
+
+router.get("/my-products", isAuthenticated, (req, res) => {
+  const userId = req.payload._id;
+  Product.find({ createdBy: userId })
+    .then((products) => res.status(200).json(products))
+    .catch((error) => {
+      console.log(error);
+      next(error);
     });
 });
 
