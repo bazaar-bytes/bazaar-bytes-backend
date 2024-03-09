@@ -5,7 +5,6 @@ const { isAuthenticated } = require("../middleware/jwt.middleware");
 
 router.get("/cart", isAuthenticated, (req, res, next) => {
   const currentUserId = req.payload._id;
-  const { product, user } = req.body;
 
   CartItem.find({ user: currentUserId })
     .populate("product")
