@@ -69,7 +69,19 @@ router.post("/signup", (req, res, next) => {
       const user = { email, name, _id };
 
       // Send a json response containing the user object
-      res.status(201).json({ user: user });
+      // res.status(201).json({ user: user });
+
+      // Create an object that will be set as the token payload
+      const payload = { _id, email, name };
+
+      // Create a JSON Web Token and sign it
+      const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
+        algorithm: "HS256",
+        expiresIn: "6h",
+      });
+
+      // Send the token as the response
+      res.status(200).json({ authToken: authToken });
     })
     .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
 });
