@@ -26,7 +26,7 @@ router.post("/create-checkout-session", isAuthenticated, (req, res) => {
         };
       }),
 
-      success_url: `http://localhost:5173/`,
+      success_url: `http://localhost:5173/payment/success`,
       cancel_url: `http://localhost:5173/login`,
     })
     .then((response) => {
