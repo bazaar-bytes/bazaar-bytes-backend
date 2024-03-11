@@ -36,4 +36,13 @@ router.delete("/cart/:productId", isAuthenticated, (req, res, next) => {
     .catch((error) => next(error));
 });
 
+router.delete("/cart/", isAuthenticated, (req, res, next) => {
+  console.log("user", req.payload);
+  CartItem.deleteMany({ user: req.payload._id })
+    .then(() => {
+      res.sendStatus(204);
+    })
+    .catch((error) => next(error));
+});
+
 module.exports = router;
