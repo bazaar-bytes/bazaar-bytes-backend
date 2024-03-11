@@ -16,13 +16,11 @@ router.get("/cart", isAuthenticated, (req, res, next) => {
 
 router.post("/cart", isAuthenticated, (req, res, next) => {
   const { product, user } = req.body;
-  console.log("reqBody", req.body);
   CartItem.create({
     product,
     user,
   })
     .then((createdCart) => {
-      console.log(createdCart);
       res.status(201).json(createdCart);
     })
     .catch((error) => next(error));

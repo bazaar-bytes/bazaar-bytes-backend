@@ -8,7 +8,31 @@ router.get("/products", (req, res, next) => {
   Product.find({})
     .populate("createdBy")
     .then((products) => {
+      console.log("Results:");
       console.log(products);
+      res.status(200).json(products);
+    })
+    .catch((err) => {
+      console.log(err);
+      next(err);
+    });
+});
+
+router.get("/products/search", (req, res, next) => {
+  const searchQuery = req.query.q;
+
+  const searchPattern = new RegExp(searchQuery, "i");
+
+  Product.find({
+    $or: [
+      { name: { $regex: searchPattern } },
+      { description: { $regex: searchPattern } },
+    ],
+  })
+    .populate("createdBy")
+    .then((products) => {
+      console.log("Results:");
+
       res.status(200).json(products);
     })
     .catch((err) => {
@@ -41,11 +65,9 @@ router.get("/my-products", isAuthenticated, (req, res) => {
 
 router.post("/products", isAuthenticated, (req, res, next) => {
   const { name, description, price, image, category, createdBy } = req.body;
-  console.log(req.body);
 
   Product.create({ name, description, price, image, category, createdBy })
     .then((newProduct) => {
-      console.log(newProduct);
       res.status(201).json(newProduct);
     })
     .catch((err) => {
