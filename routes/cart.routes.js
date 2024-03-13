@@ -38,14 +38,9 @@ router.post("/cart", isAuthenticated, (req, res, next) => {
 // });
 
 router.delete("/cart/:productId", isAuthenticated, (req, res, next) => {
-<<<<<<< HEAD
-  console.log(req.params.productId);
-  CartItem.findByIdAndDelete(req.params.productId)
-=======
   const { productId } = req.params;
   console.log(productId);
   CartItem.deleteMany({ product: req.params.productId })
->>>>>>> feat/delteCartItem
     .then(() => {
       res.sendStatus(204);
     })
