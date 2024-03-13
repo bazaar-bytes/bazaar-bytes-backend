@@ -27,16 +27,6 @@ router.post("/cart", isAuthenticated, (req, res, next) => {
     .catch((error) => next(error));
 });
 
-// router.put("/cart/:productId", isAuthenticated, (req, res, next) => {
-//   const { productId } = req.params;
-//   const { product, user } = req.body;
-//   CartItem.findByIdAndUpdate(
-//     productId,{quantity:}
-
-//     { new: true }
-//   );
-// });
-
 router.delete("/cart/:productId", isAuthenticated, (req, res, next) => {
   const { productId } = req.params;
   console.log(productId);
