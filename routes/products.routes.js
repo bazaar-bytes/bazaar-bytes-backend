@@ -44,7 +44,6 @@ router.get("/products/search", (req, res, next) => {
 router.get("/products/:productId", (req, res, next) => {
   Product.findById(req.params.productId)
     .then((productFromDB) => {
-      // console.log(productFromDB);
       res.status(200).json(productFromDB);
     })
     .catch((err) => {
@@ -95,7 +94,6 @@ router.put(
       { new: true }
     )
       .then((updatedProduct) => {
-        // console.log(updatedProduct);
         res.status(200).json(updatedProduct);
       })
       .catch((err) => {
