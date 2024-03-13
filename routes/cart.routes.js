@@ -27,6 +27,7 @@ router.post("/cart", isAuthenticated, (req, res, next) => {
 });
 
 router.delete("/cart/:productId", isAuthenticated, (req, res, next) => {
+  console.log(req.params.productId);
   CartItem.findByIdAndDelete(req.params.productId)
     .then(() => {
       res.sendStatus(204);
