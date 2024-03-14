@@ -1,8 +1,6 @@
 const Product = require("../models/Product.model");
 
 const isOwner = async (req, res, next) => {
-  console.log(req.payload);
-
   try {
     const productId = req.params.productId;
 

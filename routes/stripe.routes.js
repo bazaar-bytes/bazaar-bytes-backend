@@ -5,7 +5,6 @@ const { isAuthenticated } = require("../middleware/jwt.middleware");
 const stripe = require("stripe")(process.env.STRIPE_PRIVATE_KEY);
 
 router.post("/create-checkout-session", isAuthenticated, (req, res) => {
-  console.log("req.body", req.body);
   stripe.checkout.sessions
     .create({
       payment_method_types: ["card"],
@@ -30,7 +29,6 @@ router.post("/create-checkout-session", isAuthenticated, (req, res) => {
       cancel_url: `${process.env.ORIGIN}/login`,
     })
     .then((response) => {
-      console.log(response);
       res.json({ url: response.url });
     })
     .catch((error) => {
