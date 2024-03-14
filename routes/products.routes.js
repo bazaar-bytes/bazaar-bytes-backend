@@ -65,6 +65,12 @@ router.get("/my-products", isAuthenticated, (req, res) => {
 router.post("/products", isAuthenticated, (req, res, next) => {
   const { name, description, price, image, category, createdBy } = req.body;
 
+  if (name === "" || description === "" || price === "") {
+    res
+      .status(400)
+      .json({ message: "Name, description and price are required" });
+  }
+
   Product.create({ name, description, price, image, category, createdBy })
     .then((newProduct) => {
       res.status(201).json(newProduct);
