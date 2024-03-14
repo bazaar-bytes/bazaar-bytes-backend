@@ -38,7 +38,7 @@ A repository for the frontend (React App) can be found here: [BazaarBytes_Fronte
 | `/products/:productId`            | PUT    | Updates a specific product by ID                        | Authorization: Bearer \<JWT Token> <br>Content-Type: application/json | `{ "name": "", "description": "", "price": "", "image": "", "category": "", "createdBy": "" }` |
 | `/products/:productId`            | DELETE | Deletes a specific product by ID                         | Authorization: Bearer \<JWT Token>                         | N/A                                                    |
 
-### Stripe Endpoints
+### Stripe Endpoint
 
 | Endpoint                               | Method | Description                                               | Request Header                                          | Request Body                                   |
 |----------------------------------------|--------|-----------------------------------------------------------|---------------------------------------------------------|-----------------------------------------------|
