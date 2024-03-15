@@ -1,7 +1,7 @@
 # BazaarBytes REST API
 
 
-## REST API for a BazaarBytes app.
+## REST API for BazaarBytes.
 
 This repo implements the backend REST API (built in Express + MongoDB).
 A repository for the frontend (React App) can be found here: [BazaarBytes_Frontend](https://github.com/bazaar-bytes/bazaar-bytes-frontend)
