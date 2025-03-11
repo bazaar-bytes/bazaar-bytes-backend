@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json());
 
 // Test-Route
-app.get("/debug", (req, res) => {
+app.get("/api/debug", (req, res) => {
   res.json({ message: "Express on Vercel is working!" });
 });
 
