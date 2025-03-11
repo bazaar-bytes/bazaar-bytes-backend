@@ -15,9 +15,9 @@ const app = express();
 // Middleware für JSON
 app.use(express.json());
 
-// Testroute für Vercel
-app.get("/", (req, res) => {
-  res.json({ message: "Hello from Express on Vercel!" });
+// Test-Route
+app.get("/debug", (req, res) => {
+  res.json({ message: "Express on Vercel is working!" });
 });
 
 // ℹ️ This function is getting exported from the config folder. It runs most pieces of middleware
